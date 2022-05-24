@@ -36,3 +36,19 @@ if(length(f_name) == length(l_name)){
 #### 3 ####
 ###########
 
+num_arr <- c(3, 5, 1, 9, 2, 10, 11)
+sorted_arr <- sort(num_arr)
+mid <- length(sorted_arr)/2
+index <- round(mid)
+even_index <- index + 1
+if (length(array)%%2!=0){
+median <- sorted_arr[index]
+print(sorted_arr)
+print(paste("the median of the list is", median, sep=" "))
+} else if (length(array)%%2==0) {
+  median <- (sorted_arr[index] + sorted_arr[even_index]) / 2
+  print(sorted_arr)
+  print(paste("the median of the list is", median, sep=" "))
+} else {
+  print("array can't be manipulated!!")
+}
