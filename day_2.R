@@ -36,3 +36,17 @@ if(length(f_name) == length(l_name)){
 #### 3 ####
 ###########
 
+num_array <- c(2, 4, 5, 7, 9)
+sorted_array <- sort(num_array)
+
+if (length(sorted_array) %% 2 == 0){
+  index <- ceiling(length(sorted_array) / 2)
+  
+  median <- (sorted_array[index] + sorted_array[index + 1]) / 2
+  print(median)
+} else {
+  index <- ceiling(length(sorted_array) / 2)
+  
+  median <- sorted_array[index]
+  print(median)
+}
