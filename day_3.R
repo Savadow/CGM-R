@@ -101,10 +101,10 @@ for (i in c){
 
 sum_new <- 0
 for (i in new){
-  sum <- i + sum
+  sum_new <- i + sum_new
 }
 
-std <- (sum / n) ** (1 / 2)
+std <- (sum_new / n) ** (1 / 2)
 print(std)
 
 
