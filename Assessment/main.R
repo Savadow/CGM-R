@@ -311,7 +311,7 @@ perfect_fifth <- 0
 
 for (i in 1:1000){
   square <- floor(i ** (1/2))
-  cube <- floor(i ** (1/3))
+  cube <- ceiling(i ** (1/3))
   fifth <- floor(i ** (1/5))
   
   if ((square ** 2) != i){
@@ -321,13 +321,13 @@ for (i in 1:1000){
   if ((cube ** 3) != i){
     perfect_cube <- perfect_cube + 1
   }
-  
+
   if ((fifth ** 5) != i){
     perfect_fifth <- perfect_fifth + 1
   }
 }
 
-print(c(perfect_square, perfect_cube,perfect_fifth))
+print(c(perfect_square, perfect_cube, perfect_fifth))
 
 
                                     # 10 #
