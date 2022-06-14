@@ -10,28 +10,23 @@ library(dplyr)
                       ###########################
                       #### Data Manipulation ####
                       ###########################
-                      
-path <- "C:/Users/Trainee/Desktop/Savadow/R/Utiva/Brewery_data.csv"
+
+# Reading file                      
+path <- "CGM-R/Utiva/Brewery_data.csv"
 df <- read_csv(path)
 View(df)
 
 
-new_col <- c()
-for (country in df$COUNTRIES){
-  
-  if (country == "Nigeria" | country == "Ghana"){
-    new_col <- c(new_col, "Anglophone")
-    
-  } else {
-    new_col <- c(new_col, "Francophone")
-  }
-  
-}
+# Creating a new column based on lingua franca of the countries
+new_col <- ifelse(df$COUNTRIES == "Nigeria" | df$COUNTRIES == "Ghana", 
+                  "Anglophone", "Francophone")
 
+# Appending the column to the data frame
 data <- df %>% mutate(TERRITORIES = new_col, .after = COUNTRIES)
 View(data)
 
 
+# Creating individual territorial data frames
 anglo_terr <- data$TERRITORIES == "Anglophone"
 franco_terr <- data$TERRITORIES == "Francophone"
 
@@ -63,6 +58,33 @@ print(comparison)
                             #### 3 ####
                             ###########
 
-c2019 <- data[data$YEARS == 2019, ]
-idx <- which.max(c2019$PROFIT)
-c2019$COUNTRIES[idx]
+# Creating a new data frame and grouping by the countries based on total profit
+c2019 <- data[data$YEARS == 2019, ] %>% group_by(COUNTRIES) %>% 
+  summarise(sum_profit = sum(PROFIT))
+
+# Ordering in descending order
+c2019[order(-c2019$sum_profit), ] %>% slice(1:1)
+
+                            #### 4 ####
+                            ###########
+
+# Grouping by the years based on total profit
+year_gb <- data %>% group_by(YEARS) %>% summarise(sum_profit = sum(PROFIT))
+year_gb[order(-year_gb$sum_profit), ] %>% slice(1:1)
+
+                            #### 5 ####
+                            ###########
+
+# Grouping by the months based on total profit
+month_gb <- data %>% group_by(MONTHS) %>% summarise(sum_profit = sum(PROFIT))
+month_gb[order(month_gb$sum_profit), ] %>% slice(1:1)
+
+                          #### 6 ####
+                          ###########
+
+# Creating a new data frame
+d2018 <- data[data$YEARS == 2018 & data$MONTHS == "December", ]
+min(d2018$PROFIT)
+
+                          #### 6 ####
+                          ###########
