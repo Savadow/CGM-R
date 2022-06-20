@@ -40,3 +40,11 @@ View(data)
 # Removing the cast column
 data <- data %>% select(-cast)
 View(data)
+colnames(data)
+for (i in colnames(data)){
+  count <- 0
+  v <- 0
+  for (j in data[i]){
+    print(paste(i, "=", sum(j == "")))
+  }
+}
